@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "linux_package_index"
+version = "0.1.0"
+description = ""
+authors = ["Adham Salama <adham.salama@zohomail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.79.0"
+sqlmodel = "^0.0.6"
+uvicorn = "^0.18.2"
+
+[tool.poetry.dev-dependencies]
+pytest = ">=5.2"
+mypy = "^0.971"
+black = "^22.6.0"
+python-decouple = "^3.6"
+poethepoet = "^0.16.0"
+requests = "^2.28.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poe.tasks]
+start = "uvicorn linux_package_index.app:app"
+dev = "uvicorn linux_package_index.app:app --reload"
+check = "mypy ."
+test = "pytest ."
+fulltest.sequence = ["check", "test"]
